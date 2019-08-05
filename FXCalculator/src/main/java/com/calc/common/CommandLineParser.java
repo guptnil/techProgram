@@ -1,6 +1,7 @@
 package com.calc.common;
 
 import java.util.InputMismatchException;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 import com.calc.datamanager.FileDataManagerImpl;
@@ -21,13 +22,21 @@ public class CommandLineParser {
 
 	public void parse(String[] args){
 		try {
+			if(!(args.length > 0)) {
+				Scanner in = new Scanner(System.in);  
+				System.out.print("Please enter input in format -> <ccy1> <amount1> in <ccy2>");  
+	            String input = in.nextLine(); 
+	            args = input.split(" ");
+	            in.close(); 
+			}
+			
 			baseCurrency = args[0];
 			amount = Double.valueOf(args[1]);
 			termsCurrency = args[3];
 			
 			logger.info("User entered BaseCurrency = "+ baseCurrency + " and " +termsCurrency + " = "+ " and amount = " +amount);
 		 } catch (Exception e) {
-			throw new InputMismatchException("Please enter arguments in this format -> <ccy1> <amount1> in <ccy2>");
+			throw new InputMismatchException("Please enter input in format -> <ccy1> <amount1> in <ccy2>");
 		 }
 	 }
 	 

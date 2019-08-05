@@ -14,8 +14,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.calc.model.CurrencyPair;
 
+@Service
+@Qualifier("fileDataManager")
 public class FileDataManagerImpl implements DataManager{
 	
 	static Logger logger = Logger.getLogger(FileDataManagerImpl.class.getName());

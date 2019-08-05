@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.calc.datamanager.DataManager;
-import com.calc.datamanager.DataManagerFactory;
+import com.calc.datamanager.FileDataManagerImpl;
 import com.calc.model.CurrencyPair;
 
 public class TestFileDataManager{
@@ -21,7 +21,7 @@ public class TestFileDataManager{
 	
 	@Before
 	public void setup() {
-		dataManager = DataManagerFactory.getDataManager(DataManagerFactory.FILE);
+		dataManager = new FileDataManagerImpl();
 	}
 	
 	

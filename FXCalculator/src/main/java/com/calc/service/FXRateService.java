@@ -5,6 +5,7 @@ package com.calc.service;
  * It would apply any business rules during calculation.
  *
  */
+
 public interface FXRateService {
 	
 	public Double calculateFXRate(String baseCurrency, String termsCurrency ,Double amount);

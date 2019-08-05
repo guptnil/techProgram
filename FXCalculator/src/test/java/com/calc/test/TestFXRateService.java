@@ -8,6 +8,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import com.calc.datamanager.FileDataManagerImpl;
 import com.calc.service.FXRateService;
 import com.calc.service.FXRateServiceImpl;
 
@@ -20,7 +21,7 @@ public class TestFXRateService {
 	
 	@Before
 	public void setup() {
-		fxRateService = new FXRateServiceImpl();
+		fxRateService = new FXRateServiceImpl(new FileDataManagerImpl());
 	}
 	
 	

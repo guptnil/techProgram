@@ -2,6 +2,8 @@ package com.calc.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.InputMismatchException;
 
 import org.junit.After;
@@ -22,7 +24,7 @@ public class TestCommandLineParser {
 	
 	@Test
 	public void testParse() {
-		String[] args = {"AUD","100.0","in","USD"};
+		String[] args  = {"AUD", "100.0", "in", "USD"};
 		commandLineParser.parse(args);
 		assertEquals("Base currency should be same","AUD", commandLineParser.getBaseCurrency());
 		assertEquals("Terms currency should be same","USD", commandLineParser.getTermsCurrency());
@@ -32,13 +34,13 @@ public class TestCommandLineParser {
 	
 	@Test(expected=InputMismatchException.class)
 	public void testParseErrorInvalidArgumentsNumber() {
-		String[] args = {"AUD","100.0","USD"};
+		String[] args  = {"AUD", "100.0", "USD"};
 		commandLineParser.parse(args);
 	}
 	
 	@Test(expected=InputMismatchException.class)
 	public void testParseErrorInvalidArgumentsType() {
-		String[] args = {"AUD","abc","in","USD"};
+		String[] args  = {"AUD", "abc", "in", "USD"};
 		commandLineParser.parse(args);
 	}
 	

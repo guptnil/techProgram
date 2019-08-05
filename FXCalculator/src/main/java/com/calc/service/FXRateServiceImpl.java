@@ -2,10 +2,14 @@ package com.calc.service;
 
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.calc.datamanager.DataManager;
-import com.calc.datamanager.DataManagerFactory;
 import com.calc.model.CurrencyPair;
 
+@Service
 public class FXRateServiceImpl implements FXRateService{
 	
 	static Logger logger = Logger.getLogger(FXRateServiceImpl.class.getName());
@@ -18,9 +22,9 @@ public class FXRateServiceImpl implements FXRateService{
 	
 	DataManager dataManager ;
 	
-	public FXRateServiceImpl() {
-		super();
-		this.dataManager = DataManagerFactory.getDataManager(DataManagerFactory.FILE);
+	@Autowired 
+    public FXRateServiceImpl(@Qualifier("fileDataManager") DataManager dataManager) {
+		this.dataManager = dataManager;
 	}
 
 	/**

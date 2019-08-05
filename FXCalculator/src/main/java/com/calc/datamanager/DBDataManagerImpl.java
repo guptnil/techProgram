@@ -1,5 +1,8 @@
 package com.calc.datamanager;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.calc.model.CurrencyPair;
 
 /**
@@ -8,6 +11,8 @@ import com.calc.model.CurrencyPair;
  * In an ideal production application , data should be stored and retrieved from database 
  *
  */
+@Service
+@Qualifier("dbDataManager")
 public class DBDataManagerImpl implements DataManager{
 
 	@Override
