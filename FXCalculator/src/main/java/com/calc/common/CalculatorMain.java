@@ -3,9 +3,13 @@ package com.calc.common;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.calc.service.FXRateService;
-import com.calc.service.FXRateServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
+import com.calc.service.FXRateService;
 
 /**
  * Main runner to start the application for FX rate calculation.
@@ -14,11 +18,23 @@ import com.calc.service.FXRateServiceImpl;
  * 
  *
  */
-public class CalculatorMain {
-	
+@SpringBootApplication
+@ComponentScan("com.calc.*")
+public class CalculatorMain implements CommandLineRunner {
+
 	static Logger logger = Logger.getLogger(CalculatorMain.class.getName());
 	
-	public static void main(String[] args) {
+    @Autowired
+    private FXRateService fxRateService;
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication app = new SpringApplication(CalculatorMain.class);
+        app.run(args);
+
+    }
+
+	@Override
+    public void run(String... args) throws Exception {
 		try {
 			CommandLineParser parser = new CommandLineParser();
 			parser.parse(args);
@@ -26,16 +42,13 @@ public class CalculatorMain {
 			String termsCurrency = parser.getTermsCurrency();
 			Double amount = parser.getAmount();
 			
-			FXRateService fxRateService = new FXRateServiceImpl();
 			Double result = fxRateService.calculateFXRate(baseCurrency, termsCurrency, amount);
 			logger.info("FX rate is " +result);
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getMessage());
 		}
-		
-	}
 
-
-	
+       
+    }
 
 }
