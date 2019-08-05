@@ -1,6 +1,6 @@
 package com.calc.common;
 
-import java.util.logging.Level;
+import java.util.InputMismatchException;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +26,17 @@ public class CalculatorMain implements CommandLineRunner {
 	
     @Autowired
     private FXRateService fxRateService;
-
+    
+    CommandLineParser parser = new CommandLineParser();
+    
     public static void main(String[] args) throws Exception {
-        SpringApplication app = new SpringApplication(CalculatorMain.class);
+    	SpringApplication app = new SpringApplication(CalculatorMain.class);
         app.run(args);
-
     }
-
-	@Override
+    
+   	@Override
     public void run(String... args) throws Exception {
-		try {
-			CommandLineParser parser = new CommandLineParser();
+   		try {
 			parser.parse(args);
 			String baseCurrency = parser.getBaseCurrency();
 			String termsCurrency = parser.getTermsCurrency();
@@ -44,11 +44,13 @@ public class CalculatorMain implements CommandLineRunner {
 			
 			Double result = fxRateService.calculateFXRate(baseCurrency, termsCurrency, amount);
 			logger.info("FX rate is " +result);
-		} catch (Exception e) {
-			logger.log(Level.SEVERE, e.getMessage());
-		}
-
-       
-    }
+			
+			//It would keep prompting the user to enter the input for fx rate or quit the application.
+    		run(args);
+		}catch (InputMismatchException e) {
+			//If user enters input in wrong format , It would prompt the user to either enter the input in correct format or quit the application.
+    		run(args);
+    	} 
+	}
 
 }

@@ -22,21 +22,25 @@ public class CommandLineParser {
 
 	public void parse(String[] args){
 		try {
-			if(!(args.length > 0)) {
-				Scanner in = new Scanner(System.in);  
-				System.out.print("Please enter input in format -> <ccy1> <amount1> in <ccy2>");  
+			Scanner in = null;
+			if(args==null || !(args.length > 0)) {
+				in = new Scanner(System.in);  
+				System.out.print("Please enter input in format -> <ccy1> <amount1> in <ccy2> or type QUIT to exit from the application");  
 	            String input = in.nextLine(); 
 	            args = input.split(" ");
-	            in.close(); 
+	        }
+			// Exit the application if user chooses to quit.
+			if (args[0].equalsIgnoreCase("QUIT")) {
+				logger.info("Exiting the application");
+				in.close();
+				System.exit(0);	
 			}
-			
 			baseCurrency = args[0];
 			amount = Double.valueOf(args[1]);
 			termsCurrency = args[3];
-			
 			logger.info("User entered BaseCurrency = "+ baseCurrency + " and " +termsCurrency + " = "+ " and amount = " +amount);
 		 } catch (Exception e) {
-			throw new InputMismatchException("Please enter input in format -> <ccy1> <amount1> in <ccy2>");
+			throw new InputMismatchException("Please enter input in format -> <ccy1> <amount1> in <ccy2> or type QUIT to exit from the application");
 		 }
 	 }
 	 
