@@ -29,7 +29,7 @@ public class CommandLineParser {
 	            String input = in.nextLine(); 
 	            args = input.split(" ");
 	        }
-			// Exit the application if user chooses to quit.
+			// exit the application if user chooses to quit.
 			if (args[0].equalsIgnoreCase("QUIT")) {
 				logger.info("Exiting the application");
 				in.close();

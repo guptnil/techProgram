@@ -41,7 +41,6 @@ public class CalculatorMain implements CommandLineRunner {
 			String baseCurrency = parser.getBaseCurrency();
 			String termsCurrency = parser.getTermsCurrency();
 			Double amount = parser.getAmount();
-			
 			Double result = fxRateService.calculateFXRate(baseCurrency, termsCurrency, amount);
 			logger.info("FX rate is " +result);
 			
