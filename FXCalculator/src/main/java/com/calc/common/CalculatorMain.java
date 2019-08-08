@@ -41,9 +41,9 @@ public class CalculatorMain implements CommandLineRunner {
 			String baseCurrency = parser.getBaseCurrency();
 			String termsCurrency = parser.getTermsCurrency();
 			Double amount = parser.getAmount();
-			Double result = fxRateService.calculateFXRate(baseCurrency, termsCurrency, amount);
-			logger.info("FX rate is " +result);
+			Double fxRate = fxRateService.calculateFXRate(baseCurrency, termsCurrency, amount);
 			
+			logger.info(baseCurrency + " " + amount + " = " + termsCurrency + " " +fxRate);
 			//It would keep prompting the user to enter the input for fx rate or quit the application.
     		run(args);
 		}catch (InputMismatchException e) {
