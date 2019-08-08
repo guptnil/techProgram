@@ -16,11 +16,11 @@ public class TestCommandLineParser {
 	
 	CommandLineParser commandLineParser;
 	
+	
 	@Before
 	public void setup() {
 		commandLineParser = new CommandLineParser();
 	}
-	
 	
 	@Test
 	public void testParse() {
@@ -43,6 +43,19 @@ public class TestCommandLineParser {
 		String[] args  = {"AUD", "abc", "in", "USD"};
 		commandLineParser.parse(args);
 	}
+	
+	@Test
+	public void testUserInput() {
+		String input = "EUR 10.8 in EUR";
+	    InputStream in = new ByteArrayInputStream(input.getBytes());
+	    System.setIn(in);
+		commandLineParser.parse(null);
+	    assertEquals("EUR",commandLineParser.getBaseCurrency());
+	    assertEquals("EUR",commandLineParser.getTermsCurrency());
+	    assertEquals(new Double(10.8),commandLineParser.getAmount());
+	}
+	
+	
 	
 	@After
 	public void tearDown() {

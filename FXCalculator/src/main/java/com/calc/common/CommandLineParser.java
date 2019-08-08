@@ -4,15 +4,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import com.calc.datamanager.FileDataManagerImpl;
-
 /**
  * This class is responsible for parsing the inputs supplied by user to get the fx rate.
  *
  */
 public class CommandLineParser {
 	
-	static Logger logger = Logger.getLogger(FileDataManagerImpl.class.getName());
+	static Logger logger = Logger.getLogger(CommandLineParser.class.getName());
 	
 	private String baseCurrency;
 	
@@ -43,7 +41,7 @@ public class CommandLineParser {
 			throw new InputMismatchException("Please enter input in format -> <ccy1> <amount1> in <ccy2> or type QUIT to exit from the application");
 		 }
 	 }
-	 
+	
 	public String getBaseCurrency() {
 		return baseCurrency;
 	}

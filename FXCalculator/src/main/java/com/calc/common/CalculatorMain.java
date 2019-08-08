@@ -37,7 +37,7 @@ public class CalculatorMain implements CommandLineRunner {
    	@Override
     public void run(String... args) throws Exception {
    		try {
-			parser.parse(args);
+   			parser.parse(args);
 			String baseCurrency = parser.getBaseCurrency();
 			String termsCurrency = parser.getTermsCurrency();
 			Double amount = parser.getAmount();
